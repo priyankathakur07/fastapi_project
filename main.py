@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
 
 app = FastAPI()
 
@@ -40,4 +41,16 @@ def product_list():
         "success": True,
         "count": len(products),
         "data": products
+    }
+
+users=[]
+class User(BaseModel):
+    email: str
+    password:str
+@app.post("/signup")
+def signup(user: User):
+    users.append(user.dict())
+    return {
+        "message": "Signup successful",
+        "user": user.email
     }
