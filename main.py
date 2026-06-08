@@ -54,3 +54,8 @@ def signup(user: User):
         "message": "Signup successful",
         "user": user.email
     }
+@app.get("/welcome")
+def welcome():
+    return {
+        "message": "Welcome to FastAPI"
+    }
