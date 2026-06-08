@@ -54,3 +54,23 @@ def signup(user: User):
         "message": "Signup successful",
         "user": user.email
     }
+
+class Login(BaseModel):
+    email:str
+    password:str
+    
+@app.post("/login")
+def login(user: Login):
+
+    for registered_user in users:
+        if (
+            registered_user["email"] == user.email
+            and registered_user["password"] == user.password
+        ):
+            return {
+                "message": "Login successful"
+            }
+
+    return {
+        "message": "Invalid email or password"
+    }
